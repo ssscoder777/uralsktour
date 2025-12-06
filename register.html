@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Регистрация — Уральск</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+<header>
+  <h1>Регистрация</h1>
+  <nav><a href="index.html">Главная</a><a href="login.html">Войти</a></nav>
+</header>
+
+<div class="container">
+  <div class="section">
+    <h2>Создать аккаунт</h2>
+    <div class="form">
+      <input id="regName" placeholder="Имя пользователя" />
+      <input id="regEmail" placeholder="Email" type="email" />
+      <input id="regPass" placeholder="Пароль (мин. 6 символов)" type="password" />
+      <input id="regPass2" placeholder="Повторите пароль" type="password" />
+      <button onclick="(async function(){
+  const n = document.getElementById('regName').value.trim();
+  const e = document.getElementById('regEmail').value.trim();
+  const p = document.getElementById('regPass').value;
+  const p2 = document.getElementById('regPass2').value;
+
+  if (!n || !e || !p) {
+    alert('Заполните поля');
+    return;
+  }
+  if (p.length < 6) {
+    alert('Пароль слишком короткий');
+    return;
+  }
+  if (p !== p2) {
+    alert('Пароли не совпадают');
+    return;
+  }
+
+  const res = await fetch('/api/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: n, email: e, password: p })
+  }).then(r => r.json());
+
+  if (!res.ok) alert(res.error);
+  else {
+    alert('Регистрация прошла успешно. Проверьте почту для подтверждения.');
+    window.location = 'index.html';
+  }
+})(); ">Зарегистрироваться</button>
+    </div>
+
+<div class="footer">© 2025 Туризм в Уральске</div>
+</body>
+</html>

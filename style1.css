@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.card {
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+/* Анимации появления */
+.section, .card, .gallery img, .form, .table, .media {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover-эффекты */
+.card:hover, .gallery img:hover {
+  transform: scale(1.03);
+  transition: transform 0.3s ease;
+}
+button:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
